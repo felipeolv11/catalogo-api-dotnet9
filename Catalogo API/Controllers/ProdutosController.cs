@@ -20,7 +20,7 @@ public class ProdutosController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Produto>> Get()
     {
-        var produtos = _context.Produtos.ToList();
+        var produtos = _context.Produtos.AsNoTracking().ToList();
 
         if (produtos is null)
         {
@@ -33,7 +33,7 @@ public class ProdutosController : ControllerBase
     [HttpGet("{id:int}", Name = "ObterProduto")]
     public ActionResult<Produto> Get(int id)
     {
-        var produtos = _context.Produtos.FirstOrDefault(p => p.ProdutoId == id);
+        var produtos = _context.Produtos.AsNoTracking().FirstOrDefault(p => p.ProdutoId == id);
 
         if (produtos is null)
         {
